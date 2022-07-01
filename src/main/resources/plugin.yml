@@ -1,0 +1,9 @@
+name: AdvancedBooks
+version: '${project.version}'
+main: me.luucka.advancedbooks.AdvancedBooksPlugin
+api-version: 1.19
+softdepend: [ PlaceholderAPI ]
+authors: [ LuuckA ]
+description: Create minecraft books easily
+libraries:
+  - org.spongepowered:configurate-yaml:${libs.configurate-yaml}
