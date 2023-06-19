@@ -1,0 +1,16 @@
+per-book-permission: false
+
+# Leave empty for nothing
+open-on-join: ""
+
+# Messages
+prefix: "<grey>[<#2b2ed9>Advanced<#5d99c2>Books<grey>]"
+
+no-permission: "{PREFIX} <#d63e4d>You do not have permission"
+no-console: "{PREFIX} <#d63e4d>Console cannot run this command"
+reload: "{PREFIX} <#31e31e>Plugin reloaded!"
+command-usage: "{PREFIX} <#d63e4d>Usage: {COMMAND_USAGE}"
+not-exists: "{PREFIX} <#d63e4d>Book <grey>{BOOK} <#d63e4d>not exists!"
+already-exists: "{PREFIX} <#d63e4d>Book <grey>{BOOK} <#d63e4d>already exists!"
+created-book: "{PREFIX} <#31e31e>Successfully created <grey>{BOOK} <#31e31e>Book"
+deleted-book: "{PREFIX} <#d63e4d>Successfully deleted <grey>{BOOK} <#d63e4d>Book"
