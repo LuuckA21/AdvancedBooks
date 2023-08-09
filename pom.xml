@@ -16,8 +16,9 @@
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <libs.lombok>1.18.28</libs.lombok>
         <libs.configurate-yaml>4.1.2</libs.configurate-yaml>
+        <libs.commandapi>9.0.3</libs.commandapi>
+        <libs.extend-library>1.0.2</libs.extend-library>
         <libs.placeholderapi>2.11.3</libs.placeholderapi>
 
     </properties>
@@ -71,6 +72,10 @@
             <id>placeholderapi</id>
             <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -81,16 +86,21 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${libs.lombok}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>org.spongepowered</groupId>
             <artifactId>configurate-yaml</artifactId>
             <version>${libs.configurate-yaml}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>dev.jorel</groupId>
+            <artifactId>commandapi-bukkit-shade</artifactId>
+            <version>${libs.commandapi}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.LuuckA21</groupId>
+            <artifactId>extend-library</artifactId>
+            <version>${libs.extend-library}</version>
         </dependency>
         <dependency>
             <groupId>me.clip</groupId>

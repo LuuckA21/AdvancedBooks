@@ -1,4 +1,4 @@
-package me.luucka.advancedbooks.managers;
+package me.luucka.advancedbooks.manager;
 
 import me.luucka.advancedbooks.AdvancedBooksPlugin;
 import me.luucka.advancedbooks.config.BaseConfiguration;

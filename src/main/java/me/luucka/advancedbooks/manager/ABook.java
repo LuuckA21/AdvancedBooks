@@ -1,6 +1,5 @@
-package me.luucka.advancedbooks.managers;
+package me.luucka.advancedbooks.manager;
 
-import lombok.Getter;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.luucka.advancedbooks.AdvancedBooksPlugin;
 import me.luucka.advancedbooks.config.BaseConfiguration;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static me.luucka.advancedbooks.utils.MMColor.toComponent;
+import static me.luucka.extendlibrary.util.MMColor.toComponent;
 
 public class ABook {
 
@@ -22,13 +21,10 @@ public class ABook {
         return config.getFile().getName().substring(0, config.getFile().getName().length() - 4);
     }
 
-    @Getter
     private final String title;
 
-    @Getter
     private final String author;
 
-    @Getter
     private final List<String> pages = new ArrayList<>();
 
     public ABook(final BaseConfiguration config) {
@@ -73,4 +69,15 @@ public class ABook {
         return Book.book(toComponent(this.title), toComponent(this.author), pages);
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public List<String> getPages() {
+        return pages;
+    }
 }
