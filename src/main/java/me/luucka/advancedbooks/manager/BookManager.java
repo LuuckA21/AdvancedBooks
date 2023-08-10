@@ -2,7 +2,7 @@ package me.luucka.advancedbooks.manager;
 
 import me.luucka.advancedbooks.AdvancedBooksPlugin;
 import me.luucka.advancedbooks.config.BaseConfiguration;
-import me.luucka.advancedbooks.config.IConfig;
+import me.luucka.extendlibrary.util.IReload;
 
 import java.io.File;
 import java.util.HashSet;
@@ -12,11 +12,12 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class BookManager implements IConfig {
+public class BookManager implements IReload {
 
     private static final Logger LOGGER = Logger.getLogger("AdvancedBooks");
 
     private final File dataFolder;
+    
     private final Set<ABook> books = new HashSet<>();
 
     public BookManager(final AdvancedBooksPlugin plugin) {
@@ -24,7 +25,7 @@ public class BookManager implements IConfig {
         if (!this.dataFolder.exists()) {
             this.dataFolder.mkdirs();
         }
-        reloadConfig();
+        reload();
     }
 
     public List<String> getAllBooksName() {
@@ -47,7 +48,7 @@ public class BookManager implements IConfig {
     }
 
     @Override
-    public void reloadConfig() {
+    public void reload() {
         books.clear();
         final File[] listOfFiles = dataFolder.listFiles();
         if (listOfFiles.length >= 1) {

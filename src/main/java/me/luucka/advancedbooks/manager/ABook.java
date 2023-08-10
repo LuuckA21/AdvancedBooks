@@ -68,16 +68,4 @@ public class ABook {
         }
         return Book.book(toComponent(this.title), toComponent(this.author), pages);
     }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public List<String> getPages() {
-        return pages;
-    }
 }

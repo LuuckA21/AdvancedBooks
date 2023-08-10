@@ -1,53 +1,48 @@
 package me.luucka.advancedbooks.command;
 
 import dev.jorel.commandapi.CommandAPICommand;
-import dev.jorel.commandapi.arguments.Argument;
 import dev.jorel.commandapi.arguments.ArgumentSuggestions;
 import dev.jorel.commandapi.arguments.StringArgument;
 import me.luucka.advancedbooks.AdvancedBooksPlugin;
-import me.luucka.advancedbooks.Settings;
+import me.luucka.advancedbooks.manager.ABook;
 import me.luucka.advancedbooks.manager.BookManager;
+import me.luucka.extendlibrary.message.Message;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static me.luucka.extendlibrary.util.MMColor.toComponent;
+import static me.luucka.advancedbooks.command.CommandArgument.customABookArgument;
 
 public class AdvancedBooksCommand {
 
     private final AdvancedBooksPlugin plugin;
-    private final Settings settings;
     private final BookManager bookManager;
+
+    private final Message messages;
 
     public AdvancedBooksCommand(final AdvancedBooksPlugin plugin) {
         this.plugin = plugin;
-        this.settings = plugin.getSettings();
         this.bookManager = plugin.getBookManager();
+        this.messages = plugin.getMessages();
         register();
     }
 
     private void register() {
-        List<Argument<?>> arguments = new ArrayList<>();
-        arguments.add(new StringArgument("book").replaceSuggestions(ArgumentSuggestions.strings(bookManager.getAllBooksName())));
-
         CommandAPICommand advancedBookCommand = new CommandAPICommand("advancedbooks")
                 .withHelp("AdvancedBooks admin command", "AdvancedBooks admin command for create, delete and reload")
                 .withPermission("advancedbooks.admin")
                 .withSubcommand(
                         new CommandAPICommand("create")
-                                .withUsage("/advancedbooks create <name> <title> <author>")
+                                .withUsage("/advancedbooks create <name> [title] [author]")
                                 .withShortDescription("Create a new book")
                                 .withArguments(new StringArgument("name"))
-                                .withArguments(new StringArgument("title"))
-                                .withArguments(new StringArgument("author"))
+                                .withOptionalArguments(new StringArgument("title"))
+                                .withOptionalArguments(new StringArgument("author"))
                                 .executesPlayer((player, args) -> {
                                     final String name = (String) args.get("name");
-                                    final String title = (String) args.get("title");
-                                    final String author = (String) args.get("author");
+                                    final String title = (String) args.getOptional("title").orElse(name);
+                                    final String author = (String) args.getOptional("author").orElse(player.getName());
 
                                     bookManager.getBookByName(name).ifPresentOrElse(
-                                            book -> player.sendMessage(toComponent(settings.alreadyExists(book.getName()))),
-                                            () -> player.sendMessage(toComponent(bookManager.createBook(name, title, author) ? settings.createdBook(name) : settings.alreadyExists(name)))
+                                            book -> messages.from("already-exists").with("book", book.getName()).send(player),
+                                            () -> messages.from(bookManager.createBook(name, title, author) ? "created-book" : "already-exists").with("book", name).send(player)
                                     );
                                 })
                 )
@@ -55,13 +50,13 @@ public class AdvancedBooksCommand {
                         new CommandAPICommand("delete")
                                 .withUsage("/advancedbooks delete <book>")
                                 .withShortDescription("Delete a book")
-                                .withArguments(arguments)
+                                .withArguments(customABookArgument("book")
+                                        .replaceSuggestions(ArgumentSuggestions.strings(info -> bookManager.getAllBooksName().toArray(new String[0])))
+                                )
                                 .executesPlayer((player, args) -> {
-                                    final String name = (String) args.get("book");
-                                    bookManager.deleteBook(
-                                            bookManager.getBookByName(name).orElseThrow(() -> new RuntimeException(settings.notExists(name))
-                                            ));
-                                    player.sendMessage(toComponent(settings.deletedBook(name)));
+                                    final ABook book = (ABook) args.get("book");
+                                    bookManager.deleteBook(book);
+                                    messages.from("deleted-book").with("book", book.getName()).send(player);
                                 })
                 )
                 .withSubcommand(
@@ -70,7 +65,8 @@ public class AdvancedBooksCommand {
                                 .withShortDescription("Reload plugin")
                                 .executesPlayer((player, args) -> {
                                     plugin.reload();
-                                    player.sendMessage(toComponent(settings.reload()));
+                                    messages.addPrefix();
+                                    messages.from("reload").send(player);
                                 })
                 );
 

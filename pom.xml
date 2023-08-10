@@ -6,7 +6,7 @@
 
     <groupId>me.luucka</groupId>
     <artifactId>AdvancedBooks</artifactId>
-    <version>Build-1</version>
+    <version>Build-2</version>
     <packaging>jar</packaging>
 
     <name>AdvancedBooks</name>
@@ -46,6 +46,14 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <filters>
+                                <filter>
+                                    <artifact>com.github.LuuckA21:extend-library</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.MF</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
                         </configuration>
                     </execution>
                 </executions>
