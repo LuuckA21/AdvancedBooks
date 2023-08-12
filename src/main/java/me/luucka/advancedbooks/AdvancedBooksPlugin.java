@@ -20,7 +20,7 @@ public final class AdvancedBooksPlugin extends JavaPlugin {
 
     private static final Logger LOGGER = Logger.getLogger("AdvancedBooks");
 
-    private Config config;
+    private Setting setting;
 
     private BookManager bookManager;
 
@@ -43,8 +43,8 @@ public final class AdvancedBooksPlugin extends JavaPlugin {
 
         CommandAPI.onEnable();
 
-        config = new Config(this);
-        reloadList.add(config);
+        setting = new Setting(this);
+        reloadList.add(setting);
 
         this.bookManager = new BookManager(this);
         reloadList.add(bookManager);
@@ -76,8 +76,8 @@ public final class AdvancedBooksPlugin extends JavaPlugin {
         }
     }
 
-    public Config getSettings() {
-        return config;
+    public Setting getSettings() {
+        return setting;
     }
 
     public BookManager getBookManager() {
