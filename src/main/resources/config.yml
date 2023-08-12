@@ -1,4 +1,5 @@
+# Set this true to enable permission per book (default false).
 per-book-permission: false
 
-# Leave empty for nothing
+# Do you want to open a book on join? Set to "" to disable
 open-on-join: ""

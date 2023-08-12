@@ -25,9 +25,10 @@ Simple plugin helps you to create books
 # Configuration (config.yml)
 
 ```yaml
+# Set this true to enable permission per book (default false).
 per-book-permission: false
 
-# Leave empty for nothing
+# Do you want to open a book on join? Set to "" to disable
 open-on-join: ""
 ```
 
@@ -39,7 +40,7 @@ open-on-join: ""
 # Use https://webui.adventure.kyori.net/ to preview parsed components
 # You can find full documentation on the format (including normal colors and formatting, rgb, click/hover events, and more)
 # here: https://docs.adventure.kyori.net/minimessage/format
-#Messages containing the placeholder "<prefix>" will have it replaced with the following string
+# Messages containing the placeholder "<prefix>" will have it replaced with the following string
 prefix=<grey>[<#2b2ed9>Advanced<#5d99c2>Books<grey>]
 no-permission=<prefix> <#d63e4d>You do not have permission
 no-console=<prefix> <#d63e4d>Console cannot run this command
