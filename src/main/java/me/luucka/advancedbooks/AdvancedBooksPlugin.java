@@ -9,6 +9,8 @@ import me.luucka.advancedbooks.listener.PlayerListener;
 import me.luucka.advancedbooks.manager.BookManager;
 import me.luucka.extendlibrary.message.Message;
 import me.luucka.extendlibrary.util.IReload;
+import me.luucka.extendlibrary.util.VersionUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -40,6 +42,12 @@ public final class AdvancedBooksPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         if (LOGGER != this.getLogger()) LOGGER.setParent(this.getLogger());
+
+        if (!VersionUtil.isServerVersionSupported(VersionUtil.v1_18_2_R01)) {
+            LOGGER.log(Level.WARNING, "Version " + VersionUtil.ServerVersion.fromString(Bukkit.getServer().getBukkitVersion()) + " is not supported!");
+            LOGGER.log(Level.WARNING, "Please use one of these versions: " + VersionUtil.getSupportedVersions().toString());
+            LOGGER.log(Level.WARNING, "Continue at own risk!!!");
+        }
 
         CommandAPI.onEnable();
 
