@@ -16,10 +16,10 @@
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <libs.configurate-yaml>4.1.2</libs.configurate-yaml>
-        <libs.commandapi>9.0.3</libs.commandapi>
-        <libs.extend-library>1.1.1</libs.extend-library>
-        <libs.placeholderapi>2.11.3</libs.placeholderapi>
+        <configurate-yaml.version>4.1.2</configurate-yaml.version>
+        <commandapi.version>9.2.0</commandapi.version>
+        <extend-library.version>1.2.3</extend-library.version>
+        <placeholderapi.version>2.11.3</placeholderapi.version>
 
     </properties>
 
@@ -46,6 +46,12 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <relocations>
+                                <relocation>
+                                    <pattern>me.luucka.extendlibrary</pattern>
+                                    <shadedPattern>me.luucka.advancedbooks.libs.extendlibrary</shadedPattern>
+                                </relocation>
+                            </relocations>
                             <filters>
                                 <filter>
                                     <artifact>com.github.LuuckA21:extend-library</artifact>
@@ -90,30 +96,30 @@
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.20.1-R0.1-SNAPSHOT</version>
+            <version>1.20.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.spongepowered</groupId>
             <artifactId>configurate-yaml</artifactId>
-            <version>${libs.configurate-yaml}</version>
+            <version>${configurate-yaml.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>dev.jorel</groupId>
             <artifactId>commandapi-bukkit-shade</artifactId>
-            <version>${libs.commandapi}</version>
+            <version>${commandapi.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.github.LuuckA21</groupId>
             <artifactId>extend-library</artifactId>
-            <version>${libs.extend-library}</version>
+            <version>${extend-library.version}</version>
         </dependency>
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
-            <version>${libs.placeholderapi}</version>
+            <version>${placeholderapi.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

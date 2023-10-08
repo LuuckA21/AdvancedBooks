@@ -6,5 +6,5 @@ softdepend: [ PlaceholderAPI ]
 authors: [ LuuckA ]
 description: Create minecraft books easily
 libraries:
-  - org.spongepowered:configurate-yaml:${libs.configurate-yaml}
-  - dev.jorel:commandapi-bukkit-shade:${libs.commandapi}
+  - org.spongepowered:configurate-yaml:${configurate-yaml.version}
+  - dev.jorel:commandapi-bukkit-shade:${commandapi.version}
