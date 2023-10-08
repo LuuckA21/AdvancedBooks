@@ -3,6 +3,7 @@ package me.luucka.advancedbooks.manager;
 import me.luucka.advancedbooks.AdvancedBooksPlugin;
 import me.luucka.advancedbooks.config.BaseConfiguration;
 import me.luucka.extendlibrary.util.IReload;
+import org.bukkit.Bukkit;
 
 import java.io.File;
 import java.util.HashSet;
@@ -10,14 +11,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class BookManager implements IReload {
 
-    private static final Logger LOGGER = Logger.getLogger("AdvancedBooks");
-
     private final File dataFolder;
-    
+
     private final Set<ABook> books = new HashSet<>();
 
     public BookManager(final AdvancedBooksPlugin plugin) {
@@ -58,7 +56,7 @@ public class BookManager implements IReload {
                     try {
                         books.add(new ABook(new BaseConfiguration(file)));
                     } catch (final Exception ex) {
-                        LOGGER.log(Level.WARNING, "Book file " + fileName + " loading error!");
+                        Bukkit.getLogger().log(Level.WARNING, "Book file " + fileName + " loading error!");
                     }
                 }
             }

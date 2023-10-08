@@ -16,11 +16,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public final class AdvancedBooksPlugin extends JavaPlugin {
-
-    private static final Logger LOGGER = Logger.getLogger("AdvancedBooks");
 
     private Setting setting;
 
@@ -41,29 +38,26 @@ public final class AdvancedBooksPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        if (LOGGER != this.getLogger()) LOGGER.setParent(this.getLogger());
-
         if (!VersionUtil.isServerVersionSupported(VersionUtil.v1_18_2_R01)) {
-            LOGGER.log(Level.WARNING, "Version " + VersionUtil.ServerVersion.fromString(Bukkit.getServer().getBukkitVersion()) + " is not supported!");
-            LOGGER.log(Level.WARNING, "Please use one of these versions: " + VersionUtil.getSupportedVersions().toString());
-            LOGGER.log(Level.WARNING, "Continue at own risk!!!");
+            Bukkit.getLogger().log(Level.WARNING, "Version " + VersionUtil.ServerVersion.fromString(Bukkit.getServer().getBukkitVersion()) + " is not supported!");
+            Bukkit.getLogger().log(Level.WARNING, "Please use one of these versions: " + String.join(", ", VersionUtil.getSupportedVersions().toString()));
+            Bukkit.getLogger().log(Level.WARNING, "Continue at own risk!!!");
         }
 
         CommandAPI.onEnable();
 
-        setting = new Setting(this);
-        reloadList.add(setting);
+        this.setting = new Setting(this);
+        this.reloadList.add(setting);
 
         this.bookManager = new BookManager(this);
-        reloadList.add(bookManager);
+        this.reloadList.add(bookManager);
 
         this.messages = new Message(this, "messages");
-        this.messages.addPrefix();
         this.reloadList.add(this.messages);
 
         if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
             usePlaceholderAPI = true;
-            LOGGER.log(Level.INFO, "Find PlaceholderAPI...");
+            Bukkit.getLogger().log(Level.INFO, "Find PlaceholderAPI...");
         }
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
