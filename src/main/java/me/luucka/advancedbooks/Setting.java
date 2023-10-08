@@ -13,14 +13,6 @@ public class Setting implements IReload {
 
     private String bookOnJoin;
 
-    public boolean isPerBookPermission() {
-        return perBookPermission;
-    }
-
-    public String getBookOnJoin() {
-        return bookOnJoin;
-    }
-
     public Setting(final AdvancedBooksPlugin plugin) {
         this.config = new BaseConfiguration(new File(plugin.getDataFolder(), "config.yml"), "/config.yml");
         reload();
@@ -31,5 +23,13 @@ public class Setting implements IReload {
         config.load();
         perBookPermission = config.getBoolean("per-book-permission", false);
         bookOnJoin = config.getString("open-on-join", "");
+    }
+    
+    public boolean isPerBookPermission() {
+        return perBookPermission;
+    }
+
+    public String getBookOnJoin() {
+        return bookOnJoin;
     }
 }
