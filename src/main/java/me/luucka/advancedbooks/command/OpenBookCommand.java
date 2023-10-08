@@ -10,7 +10,6 @@ import me.luucka.advancedbooks.manager.BookManager;
 import me.luucka.extendlibrary.message.Message;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static me.luucka.advancedbooks.command.CommandArgument.customABookArgument;
@@ -38,12 +37,11 @@ public class OpenBookCommand {
                         .replaceSuggestions(ArgumentSuggestions.strings(info -> {
                             if (info.sender() instanceof Player player) {
                                 if (setting.isPerBookPermission() && !player.hasPermission("advancedbooks.bypass")) {
-                                    final List<String> options = new ArrayList<>();
-                                    for (final String book : bookManager.getAllBooksName()) {
-                                        if (player.hasPermission("advancedbooks.open." + book)) {
-                                            options.add(book);
-                                        }
-                                    }
+                                    List<String> options = bookManager.getAllBooksName()
+                                            .stream()
+                                            .filter(book -> player.hasPermission("advancedbooks.open." + book))
+                                            .toList();
+
                                     return options.toArray(new String[0]);
                                 }
                             }
